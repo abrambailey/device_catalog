@@ -28,11 +28,10 @@ class SubmodelsController < ApplicationController
   def savesubmodel
   	@brand = Brand.find_by_name(params[:brand_name])
   	@model = Model.find_by_name(params[:model_name])
-  	@submodel = Submodel.find_or_initialize_by_name(params[:submodel_name])
-  	if @submodel.model_id == @model.id
-  	else
   	@submodel = Submodel.new
   	@submodel.name = params[:submodel_name] 
+  	@submodelcheck = Submodel.where(:name => @submodel.name, :brand_id => @brand.id, :model_id => @model.id)
+		if @submodelcheck.empty?
   	@submodel.brand_id = @brand.id
   	@submodel.model_id = @model.id
   	@submodel.save

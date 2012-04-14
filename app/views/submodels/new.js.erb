@@ -1,8 +1,9 @@
+var brand = $('#style_brand_name').val();
 var model = $('#style_model_name').val();
 var submodel = $('#style_submodel_name').val();
 $('#icon3').append('<i class="icon-ok"></i>');
 $.ajax({
-    url: '/savesubmodel?submodel_name=' + submodel + '&model_name=' + model, type: 'get', 
+    url: '/savesubmodel?submodel_name=' + submodel + '&model_name=' + model + '&brand_name=' + brand, type: 'get', 
     dataType: 'json',
     processData: false,
     success: function(data) {

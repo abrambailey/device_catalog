@@ -2,7 +2,7 @@ class StylesController < ApplicationController
   # GET /styles
   # GET /styles.json
   def index
-    @styles = Style.all
+    @styles = Style.all.reverse
     @style = Style.new
 
     respond_to do |format|
@@ -47,20 +47,28 @@ class StylesController < ApplicationController
   # POST /styles.json
   def create
     @style = Style.new
+    @brand = Brand.find_by_name(params[:style][:brand_name])
+    @model = Model.find_by_name(params[:style][:model_name])
     @submodel = Submodel.find_by_name(params[:style][:submodel_name])
     @style.name = params[:style][:name]
     @style.submodel_id = @submodel.id
-		
-    respond_to do |format|
-      if @style.save
-        format.html { redirect_to @style, notice: 'Style was successfully created.' }
-        format.json { render json: @style, status: :created, location: @style }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @style.errors, status: :unprocessable_entity }
+    @style.model_id = @model.id
+    @style.brand_id = @brand.id
+		@stylecheck = Style.where(:name => @style.name, :brand_id => @brand.id, :model_id => @model.id, :submodel_id => @submodel.id)
+		if @stylecheck.empty?
+			@style.save
+		  respond_to do |format|
+		      #format.html { redirect_to @style, notice: 'Style was successfully created.' }
+		      format.json { render json: @style, status: :created, location: @style }
+		      format.js
       end
-    end
-  end
+    else
+    	@style = @stylecheck.first
+    	respond_to do |format|
+      	format.json { render json: @style.errors, status: :unprocessable_entity }
+	    end
+	  end
+	end
 
   # PUT /styles/1
   # PUT /styles/1.json
@@ -87,6 +95,7 @@ class StylesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to styles_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end
