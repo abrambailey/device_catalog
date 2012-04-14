@@ -1,0 +1,7 @@
+<%= form_for @style, :html => { :class => 'form-inline' }, :remote => true, :url => brandsubmit_path do |f| %>
+<%= @brand.inspect %>
+    <%= f.text_field :brand_name, data: {autocomplete_source: brands_path}, :class => 'text_field', :placeholder => "Model"  %>
+
+      <%= f.submit "Choose", :class => 'btn btn-primary' %>
+
+<% end %>

@@ -1,0 +1,17 @@
+<h1>/Style</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @style.name %>
+</p>
+
+<p>
+  <b>Submodel</b><br>
+  <%= @style.submodel_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', styles_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_style_path(@style), :class => 'btn' %>
+  <%= link_to 'Delete', style_path(@style), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

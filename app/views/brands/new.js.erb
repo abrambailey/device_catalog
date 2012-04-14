@@ -1,0 +1,21 @@
+var brand = $('#style_brand_name').val();
+$.ajax({
+    url: '/selectmodels?brand_name=' + brand, type: 'get', 
+    dataType: 'json',
+    processData: false,
+    success: function(data) {
+        if (data == "record_not_found") {
+            alert("Record not found");
+        }
+        else {
+            var source = [];
+            for (i in data) {
+                source.push(data[i]['name']);
+            }
+            $('#style_model_name').autocomplete({ source: source });
+            $('#icon1').append('<i class="icon-ok"></i>');
+        }
+    }
+});
+
+

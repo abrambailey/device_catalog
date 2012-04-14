@@ -1,0 +1,40 @@
+<div class = "span5" id = "entryform">
+<br /><%= render :partial => 'form2' %>
+</div>
+
+<div class = "span7">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Submodel</th>
+      <th>Style</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @styles.each do |style| %>
+      <tr>
+        <td><%= style.id %></td>
+        <td><%= style.submodel.model.brand.name %></td>
+        <td><%= style.submodel.model.name %></td>
+				<td><%= style.submodel.name %></td>
+        <td><%= link_to style.name, style_path(style) %></td>
+        <td><%= style.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_style_path(style), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', style_path(style), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_style_path, :class => 'btn btn-primary' %>
+<br />
+<br />
+<div id = "debug"><%= render :partial => 'debug' %></div>
+</div>

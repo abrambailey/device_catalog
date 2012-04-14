@@ -1,0 +1,21 @@
+var model = $('#style_model_name').val();
+var submodel = $('#style_submodel_name').val();
+$('#icon3').append('<i class="icon-ok"></i>');
+$.ajax({
+    url: '/savesubmodel?submodel_name=' + submodel + '&model_name=' + model, type: 'get', 
+    dataType: 'json',
+    processData: false,
+    success: function(data) {
+        if (data == "record_not_found") {
+            alert("Record not found");
+        }
+        else {
+            var source = [];
+            for (i in data) {
+                source.push(data[i]['name']);
+            }
+        }
+    }
+});
+
+
