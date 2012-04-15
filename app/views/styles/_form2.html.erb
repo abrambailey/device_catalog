@@ -1,17 +1,65 @@
 <%= form_for @style, :html => { :class => 'form-inline', :id => 'styleform' }, :remote => true do |f| %>
 
-    <%= f.text_field :brand_name, data: {autocomplete_source: brands_path}, :class => 'text_field', :placeholder => "Brand"  %>
-    
-		<%= link_to 'Create Brand', new_brand_path, :remote => true, :class => 'btn btn-primary' %> <span id = "icon1"></span>
+    <%= f.text_field :brand_name, data: {autocomplete_source: brands_path}, :class => 'text_field', :placeholder => "Brand"  %> <span id = "icon1"></span>
 		<br /><br />
-		<%= f.text_field :model_name, :class => 'text_field', :placeholder => "Model"  %>
-		<%= link_to 'Create Model', new_model_path, :remote => true, :class => 'btn btn-primary' %> <span id = "icon2"></span>
+		<%= f.text_field :model_name, :class => 'text_field', :placeholder => "Model"  %> <span id = "icon2"></span>
     <br /><br />
     
-    <%= f.text_field :submodel_name, :class => 'text_field', :placeholder => "Submodel"  %>
-		<%= link_to 'Create Submodel', new_submodel_path, :remote => true, :class => 'btn btn-primary' %> <span id = "icon3"></span>
+    <%= f.text_field :submodel_name, :class => 'text_field', :placeholder => "Submodel"  %> <span id = "icon3"></span>
     <br /><br />
     
     <%= f.text_field :name, :class => 'text_field', :placeholder => "Style"  %> <%= f.submit "Create Style", :class => 'btn btn-primary' %>
 
 <% end %>
+
+<script>
+$("#style_brand_name").focusout(function() {
+	var brand = $('#style_brand_name').val();
+	$.ajax({
+		  url: '/selectmodels?brand_name=' + brand, type: 'get', 
+		  dataType: 'json',
+		  processData: false,
+		  success: function(data) {
+		      if (data == "record_not_found") {
+		          alert("Record not found");
+		      }
+		      else {
+		          var source = [];
+		          for (i in data) {
+		              source.push(data[i]['name']);
+		          }
+		      $('#style_model_name').autocomplete({ source: source });
+		      $('#icon1').html('<i class="icon-ok"></i>');
+		      }
+		  }
+	});
+});
+
+$("#style_model_name").focusout(function() {
+	var brand = $('#style_brand_name').val();
+	var model = $('#style_model_name').val();
+	$.ajax({
+		  url: '/selectsubmodels?model_name=' + model + '&brand_name=' + brand, type: 'get', 
+		  dataType: 'json',
+		  processData: false,
+		  success: function(data) {
+		      if (data == "record_not_found") {
+		          alert("Record not found");
+		      }
+		      else {
+		          var source = [];
+		          for (i in data) {
+		              source.push(data[i]['name']);
+		          }
+		          $('#style_submodel_name').autocomplete({ source: source });
+		          $('#icon2').html('<i class="icon-ok"></i>');
+		      }
+		  }
+	});
+});
+
+$("#style_submodel_name").focusout(function() {
+  $('#icon3').html('<i class="icon-ok"></i>');
+});
+
+</script>

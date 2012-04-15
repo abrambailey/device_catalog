@@ -1,5 +1,5 @@
 class Style < ActiveRecord::Base
-  attr_accessible :name, :submodel_id, :submodel_name, :model_name, :brand_name
+  attr_accessible :name, :submodel_id, :model_id, :brand_id, :submodel_name, :model_name, :brand_name
   belongs_to :submodel
   belongs_to :model
   belongs_to :style
@@ -10,7 +10,7 @@ class Style < ActiveRecord::Base
 	end
 	
   def submodel_name=(name)
-    self.submodel = Submodel.find_or_create_by_name(name) if name.present?
+    self.submodel = Submodel.find_or_initialize_by_name(name) if name.present?
   end
 
   def model_name
@@ -18,7 +18,7 @@ class Style < ActiveRecord::Base
 	end
 	
   def model_name=(name)
-    self.model = Model.find_or_create_by_name(name) if name.present?
+    self.model = Model.find_or_initialize_by_name(name) if name.present?
   end
 
   def brand_name
@@ -26,7 +26,7 @@ class Style < ActiveRecord::Base
 	end
 	
   def brand_name=(name)
-    self.brand = Brand.find_or_create_by_name(name) if name.present?
+    self.brand = Brand.find_or_initialize_by_name(name) if name.present?
   end
   
   before_save :format_string

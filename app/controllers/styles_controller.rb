@@ -46,10 +46,20 @@ class StylesController < ApplicationController
   # POST /styles
   # POST /styles.json
   def create
-    @style = Style.new
-    @brand = Brand.find_by_name(params[:style][:brand_name])
-    @model = Model.find_by_name(params[:style][:model_name])
-    @submodel = Submodel.find_by_name(params[:style][:submodel_name])
+    @brand = Brand.find_or_create_by_name(params[:style][:brand_name])
+    @model = Model.where(:name => params[:style][:model_name], :brand_id => @brand.id)
+    if @model.empty?
+    	@model = Model.create(:name => params[:style][:model_name], :brand_id => @brand.id)
+    else 
+    	@model = @model.first
+  	end
+    @submodel = Submodel.where(:name => params[:style][:submodel_name], :model_id => @model.id, :brand_id => @brand.id)
+    if @submodel.empty?
+    	@submodel = Submodel.create(:name => params[:style][:submodel_name], :model_id => @model.id, :brand_id => @brand.id)
+  	else
+  		@submodel = @submodel.first
+		end
+		@style = Style.new
     @style.name = params[:style][:name]
     @style.submodel_id = @submodel.id
     @style.model_id = @model.id

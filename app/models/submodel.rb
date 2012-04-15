@@ -1,5 +1,5 @@
 class Submodel < ActiveRecord::Base
-  attr_accessible :model_id, :name
+  attr_accessible :model_id, :brand_id, :name
   has_many :styles
   belongs_to :model
   belongs_to :brand

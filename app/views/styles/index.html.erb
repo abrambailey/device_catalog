@@ -22,15 +22,12 @@
         <td><%= style.name %></td>
         <td>
           <%= link_to 'Edit', edit_style_path(style), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', style_path(style), :method => :delete, :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Destroy', style_path(style), :remote => true, :method => :delete, :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New', new_style_path, :class => 'btn btn-primary' %>
 <br />
-<br />
-<div id = "debug"><%= render :partial => 'debug' %></div>
 </div>

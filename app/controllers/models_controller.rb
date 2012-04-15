@@ -6,7 +6,7 @@ class ModelsController < ApplicationController
   end
   
   def selectmodels
-  	@brand = Brand.find_or_create_by_name(params[:brand_name])
+  	@brand = Brand.find_or_initialize_by_name(params[:brand_name])
   	@models = Model.where(:brand_id => @brand.id)
   	render json: @models
   end
