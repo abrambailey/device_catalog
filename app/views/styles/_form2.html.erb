@@ -13,15 +13,20 @@
 <% end %>
 
 <script>
-$("#style_brand_name").focusout(function() {
+$("#style_model_name").focusin(function() {
 	var brand = $('#style_brand_name').val();
 	$.ajax({
 		  url: '/selectmodels?brand_name=' + brand, type: 'get', 
 		  dataType: 'json',
 		  processData: false,
 		  success: function(data) {
-		      if (data == "record_not_found") {
-		          alert("Record not found");
+		      if (data == "") {
+		      		if (brand == "") {
+		      		$('#icon1').html('<i class="icon-remove"></i>');
+		      		}
+		      		else {
+		          $('#icon1').html('<i class="icon-ok"></i> ' + brand + ' initialized');
+		          }
 		      }
 		      else {
 		          var source = [];
@@ -29,13 +34,13 @@ $("#style_brand_name").focusout(function() {
 		              source.push(data[i]['name']);
 		          }
 		      $('#style_model_name').autocomplete({ source: source });
-		      $('#icon1').html('<i class="icon-ok"></i>');
+		      $('#icon1').html('<i class="icon-ok"></i> ' + brand + ' found');
 		      }
 		  }
 	});
 });
 
-$("#style_model_name").focusout(function() {
+$("#style_submodel_name").focusin(function() {
 	var brand = $('#style_brand_name').val();
 	var model = $('#style_model_name').val();
 	$.ajax({
@@ -43,8 +48,42 @@ $("#style_model_name").focusout(function() {
 		  dataType: 'json',
 		  processData: false,
 		  success: function(data) {
-		      if (data == "record_not_found") {
-		          alert("Record not found");
+		      if (data == "") {
+		      	if (brand == "") {
+		      		$('#icon2').html('<i class="icon-remove"></i>');
+		      		}
+		      		else {
+		          $('#icon2').html('<i class="icon-ok"></i> ' + model + ' initialized');
+		          }
+		      	}
+		      else {
+		          var source = [];
+		          for (i in data) {
+		              source.push(data[i]['name']);
+		          }
+		          $('#style_submodel_name').autocomplete({ source: source });
+		          $('#icon2').html('<i class="icon-ok"></i> ' + model + ' found');
+		      }
+		  }
+	});
+});
+
+$("#style_name").focusin(function() {
+	var brand = $('#style_brand_name').val();
+	var model = $('#style_model_name').val();
+	var submodel = $('#style_submodel_name').val();
+	$.ajax({
+		  url: '/submodeltest?submodel_name=' + submodel + '&model_name=' + model + '&brand_name=' + brand, type: 'get', 
+		  dataType: 'json',
+		  processData: false,
+		  success: function(data) {
+		      if (data == "") {
+		      	if (submodel == "") {
+		      		$('#icon3').html('<i class="icon-remove"></i>');
+		      		}
+		      		else {
+		          $('#icon3').html('<i class="icon-ok"></i> ' + submodel + ' initialized');
+		          }
 		      }
 		      else {
 		          var source = [];
@@ -52,14 +91,12 @@ $("#style_model_name").focusout(function() {
 		              source.push(data[i]['name']);
 		          }
 		          $('#style_submodel_name').autocomplete({ source: source });
-		          $('#icon2').html('<i class="icon-ok"></i>');
+		          $('#icon3').html('<i class="icon-ok"></i> ' + submodel + ' found');
 		      }
 		  }
 	});
 });
 
-$("#style_submodel_name").focusout(function() {
-  $('#icon3').html('<i class="icon-ok"></i>');
-});
+
 
 </script>

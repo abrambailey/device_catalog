@@ -87,7 +87,7 @@ class StylesController < ApplicationController
 
     respond_to do |format|
       if @style.update_attributes(params[:style])
-        format.html { redirect_to @style, notice: 'Style was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Style was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

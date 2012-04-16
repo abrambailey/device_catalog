@@ -1,1 +1,3 @@
 $('#devices').prepend('<tr id="<%= j("#{@style.id}") %>"><td><%= j("#{@brand.name}") %></td><td><%= j("#{@model.name}") %></td><td><%= j("#{@submodel.name}") %></td><td><%= j("#{@style.name}") %></td><td><%= link_to 'Edit', edit_style_path(@style.id), :class => 'btn btn-mini' %> <%= j(link_to 'Destroy', style_path(@style.id), :method => :delete, :remote=>true, :class => 'btn btn-mini btn-danger') %></td></tr>');
+
+$('#<%= j("#{@style.id}") %> > td').effect('highlight', {}, 1000);

@@ -6,17 +6,14 @@ class SubmodelsController < ApplicationController
   end
 
   def selectsubmodels
-  	@brand = Brand.find_by_name(params[:brand_name])
+  	@brand = Brand.find_or_initialize_by_name(params[:brand_name])
   	@model = Model.find_or_initialize_by_name(params[:model_name])
   	if @model.brand_id == @brand.id 
-		else 
-			@model = Model.new
-			@model.name = params[:model_name]
-			@model.brand_id = @brand.id
-			@model.save
-		end
   	@submodels = Submodel.where(:model_id => @model.id)
   	render json: @submodels
+  	else
+  	render json: []
+  	end
   end
   
   def new
@@ -25,9 +22,20 @@ class SubmodelsController < ApplicationController
     end
   end
   
+  def submodeltest
+  	@model = Model.find_or_initialize_by_name(params[:model_name])
+  	@brand = Brand.find_or_initialize_by_name(params[:brand_name])
+  	@submodel = Submodel.where(:name => params[:submodel_name], :model_id => @model.id, :brand_id => @brand.id)
+  	if @submodel.empty?
+  		render json: []
+		else
+			render json: @submodel
+  	end
+  end
+  
   def savesubmodel
-  	@brand = Brand.find_by_name(params[:brand_name])
-  	@model = Model.find_by_name(params[:model_name])
+  	@brand = Brand.find_or_initialize_by_name(params[:brand_name])
+  	@model = Model.find_or_initialize_by_name(params[:model_name])
   	@submodel = Submodel.new
   	@submodel.name = params[:submodel_name] 
   	@submodelcheck = Submodel.where(:name => @submodel.name, :brand_id => @brand.id, :model_id => @model.id)

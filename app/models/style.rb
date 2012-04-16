@@ -5,6 +5,11 @@ class Style < ActiveRecord::Base
   belongs_to :style
   belongs_to :brand
   
+  validates_presence_of :name
+  validates_presence_of :brand_name
+  validates_presence_of :model_name
+  validates_presence_of :submodel_name
+  
   def submodel_name
   	submodel.try(:name)
 	end
