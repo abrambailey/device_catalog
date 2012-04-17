@@ -1,15 +1,16 @@
-<div class = "span5" id = "entryform">
+<div class = "well span5" id = "entryform">
 <br /><%= render :partial => 'form2' %>
 </div>
 
-<div class = "span7">
-<table class="table table-striped" id="devices">
+<div class = "span6">
+<table class="table table-condensed" id="devices">
   <thead>
     <tr>
       <th>Brand</th>
       <th>Model</th>
       <th>Submodel</th>
       <th>Style</th>
+      <th>Market Style</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <td><%= style.submodel.model.brand.name %></td>
         <td><%= style.submodel.model.name %></td>
 				<td><%= style.submodel.name %></td>
+        <td><%= style.generic %></td>
         <td><%= style.name %></td>
         <td>
           <%= link_to 'Edit', edit_style_path(style), :class => 'btn btn-mini' %>

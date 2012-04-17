@@ -1,18 +1,24 @@
-<%= form_for @style, :html => { :class => 'form-inline', :id => 'styleform' }, :remote => true do |f| %>
+<%= simple_form_for @style, :html => { :class => 'form-horizontal' }, :remote => true do |m| %>
+    
+    <%= m.input :brand_name, :label => 'Brand', :placeholder => 'Brand', :input_html => { :data => {autocomplete_source: brands_path} } %>
+    <%= m.input :model_name, :label => 'Model', :placeholder => 'Model' %>
+    <%= m.input :submodel_name, :label => 'Submodel', :placeholder => 'Submodel' %>
+		<%= m.input :name, :label => 'Marketing Style', :placeholder => 'Style' %>
+		<%= m.input :generic, :label => 'Generic Style', :placeholder => 'Generic Style' %>
 
-    <%= f.text_field :brand_name, data: {autocomplete_source: brands_path}, :class => 'text_field', :placeholder => "Brand"  %> <span id = "icon1"></span>
-		<br /><br />
-		<%= f.text_field :model_name, :class => 'text_field', :placeholder => "Model"  %> <span id = "icon2"></span>
-    <br /><br />
-    
-    <%= f.text_field :submodel_name, :class => 'text_field', :placeholder => "Submodel"  %> <span id = "icon3"></span>
-    <br /><br />
-    
-    <%= f.text_field :name, :class => 'text_field', :placeholder => "Style"  %> <%= f.submit "Create Style", :class => 'btn btn-primary' %>
+    <div class="form-actions" style = "background:none">
+      <%= m.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', brands_path, :class => 'btn' %>
+    </div>
 
 <% end %>
 
 <script>
+$("#style_brand_name").parent().append('<span class = "help-inline" id = "icon1"></span>');
+$("#style_model_name").parent().append('<span class = "help-inline" id = "icon2"></span>');
+$("#style_submodel_name").parent().append('<span class = "help-inline" id = "icon3"></span>');
+$("#style_name").parent().append('<span class = "help-inline" id = "icon4"></span>');
+
 $("#style_model_name").focusin(function() {
 	var brand = $('#style_brand_name').val();
 	$.ajax({
@@ -49,7 +55,7 @@ $("#style_submodel_name").focusin(function() {
 		  processData: false,
 		  success: function(data) {
 		      if (data == "") {
-		      	if (brand == "") {
+		      	if (model == "") {
 		      		$('#icon2').html('<i class="icon-remove"></i>');
 		      		}
 		      		else {

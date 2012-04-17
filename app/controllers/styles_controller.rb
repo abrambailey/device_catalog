@@ -59,8 +59,7 @@ class StylesController < ApplicationController
   	else
   		@submodel = @submodel.first
 		end
-		@style = Style.new
-    @style.name = params[:style][:name]
+		@style = Style.new(params[:style])
     @style.submodel_id = @submodel.id
     @style.model_id = @model.id
     @style.brand_id = @brand.id
