@@ -3,11 +3,11 @@
     <%= m.input :brand_name, :label => 'Brand', :placeholder => 'Brand', :input_html => { :data => {autocomplete_source: brands_path} } %>
     <%= m.input :model_name, :label => 'Model', :placeholder => 'Model' %>
     <%= m.input :submodel_name, :label => 'Submodel', :placeholder => 'Submodel' %>
-		<%= m.input :name, :label => 'Marketing Style', :placeholder => 'Style' %>
+		<%= m.input :name, :label => 'Marketing Style', :placeholder => 'Market Style' %>
 		<%= m.input :generic, :label => 'Generic Style', :placeholder => 'Generic Style' %>
 		<%= m.input :battery, :collection => [ "10", "312", "13", "675" ],  :label => 'Battery Size' %>
-		<%= m.input :programs %>
-		<%= m.input :channels %>
+		<%= m.input :programs, :placeholder => "# of Programs" %>
+		<%= m.input :channels, :placeholder => "# of Channels" %>
 		<%= m.input :options , :collection => [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ], :input_html => { :multiple => true } %>
 
     <div class="form-actions" style = "background:none">

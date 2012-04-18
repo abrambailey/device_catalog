@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417204254) do
+ActiveRecord::Schema.define(:version => 20120418201620) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -33,11 +33,7 @@ ActiveRecord::Schema.define(:version => 20120417204254) do
     t.datetime "updated_at",  :null => false
     t.integer  "model_id"
     t.integer  "brand_id"
-    t.boolean  "power"
     t.integer  "channels"
-    t.boolean  "bluetooth"
-    t.boolean  "fm"
-    t.boolean  "vc"
     t.string   "battery"
     t.integer  "programs"
     t.string   "generic"
