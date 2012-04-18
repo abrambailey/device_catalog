@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417091137) do
+ActiveRecord::Schema.define(:version => 20120417204254) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120417091137) do
     t.string   "battery"
     t.integer  "programs"
     t.string   "generic"
+    t.string   "options"
   end
 
   create_table "submodels", :force => true do |t|

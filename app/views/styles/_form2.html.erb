@@ -5,6 +5,10 @@
     <%= m.input :submodel_name, :label => 'Submodel', :placeholder => 'Submodel' %>
 		<%= m.input :name, :label => 'Marketing Style', :placeholder => 'Style' %>
 		<%= m.input :generic, :label => 'Generic Style', :placeholder => 'Generic Style' %>
+		<%= m.input :battery, :collection => [ "10", "312", "13", "675" ],  :label => 'Battery Size' %>
+		<%= m.input :programs %>
+		<%= m.input :channels %>
+		<%= m.input :options , :collection => [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ], :input_html => { :multiple => true } %>
 
     <div class="form-actions" style = "background:none">
       <%= m.submit nil, :class => 'btn btn-primary' %>
@@ -14,6 +18,8 @@
 <% end %>
 
 <script>
+$("#style_battery").chosen();
+$("#style_options").chosen();
 $("#style_brand_name").parent().append('<span class = "help-inline" id = "icon1"></span>');
 $("#style_model_name").parent().append('<span class = "help-inline" id = "icon2"></span>');
 $("#style_submodel_name").parent().append('<span class = "help-inline" id = "icon3"></span>');

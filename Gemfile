@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3.rc2'
 gem 'execjs' 
 gem 'simple_form'
+gem 'chosen-rails'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

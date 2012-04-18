@@ -1,5 +1,5 @@
 class Style < ActiveRecord::Base
-  attr_accessible :name, :submodel_id, :model_id, :brand_id, :submodel_name, :model_name, :brand_name, :generic
+  attr_accessible :name, :submodel_id, :model_id, :brand_id, :submodel_name, :model_name, :brand_name, :generic, :battery, :programs, :channels, :options
   belongs_to :submodel
   belongs_to :model
   belongs_to :style
