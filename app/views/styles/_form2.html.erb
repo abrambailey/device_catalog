@@ -4,11 +4,11 @@
     <%= m.input :model_name, :label => 'Model', :placeholder => 'Model' %>
     <%= m.input :submodel_name, :label => 'Submodel', :placeholder => 'Submodel' %>
 		<%= m.input :name, :label => 'Marketing Style', :placeholder => 'Market Style' %>
-		<%= m.input :generic, :label => 'Generic Style', :placeholder => 'Generic Style' %>
+		<%= m.input :generic, :collection => [ "BTE", "RITE", "Thin Tube", "IIC", "CIC", "ITC", "ITE" ], :label => 'Generic Style' %>
 		<%= m.input :battery, :collection => [ "10", "312", "13", "675" ],  :label => 'Battery Size' %>
 		<%= m.input :programs, :placeholder => "# of Programs" %>
 		<%= m.input :channels, :placeholder => "# of Channels" %>
-		<%= m.input :options , :collection => [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ], :input_html => { :multiple => true } %>
+		<%= m.input :options, :collection => [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ], :input_html => { :multiple => true } %>
 
     <div class="form-actions" style = "background:none">
       <%= m.submit nil, :class => 'btn btn-primary' %>
@@ -19,6 +19,7 @@
 
 <script>
 $("#style_battery").chosen();
+$("#style_generic").chosen();
 $("#style_options").chosen();
 $("#style_brand_name").parent().append('<span class = "help-inline" id = "icon1"></span>');
 $("#style_model_name").parent().append('<span class = "help-inline" id = "icon2"></span>');
@@ -37,7 +38,7 @@ $("#style_model_name").focusin(function() {
 		      		$('#icon1').html('<i class="icon-remove"></i>');
 		      		}
 		      		else {
-		          $('#icon1').html('<i class="icon-ok"></i> ' + brand + ' initialized');
+		          $('#icon1').html('<i class="icon-pencil"></i> ' + brand);
 		          }
 		      }
 		      else {
@@ -46,7 +47,7 @@ $("#style_model_name").focusin(function() {
 		              source.push(data[i]['name']);
 		          }
 		      $('#style_model_name').autocomplete({ source: source });
-		      $('#icon1').html('<i class="icon-ok"></i> ' + brand + ' found');
+		      $('#icon1').html('<i class="icon-ok"></i> ' + brand);
 		      }
 		  }
 	});
@@ -65,7 +66,7 @@ $("#style_submodel_name").focusin(function() {
 		      		$('#icon2').html('<i class="icon-remove"></i>');
 		      		}
 		      		else {
-		          $('#icon2').html('<i class="icon-ok"></i> ' + model + ' initialized');
+		          $('#icon2').html('<i class="icon-pencil"></i> ' + model);
 		          }
 		      	}
 		      else {
@@ -74,7 +75,7 @@ $("#style_submodel_name").focusin(function() {
 		              source.push(data[i]['name']);
 		          }
 		          $('#style_submodel_name').autocomplete({ source: source });
-		          $('#icon2').html('<i class="icon-ok"></i> ' + model + ' found');
+		          $('#icon2').html('<i class="icon-ok"></i> ' + model);
 		      }
 		  }
 	});
@@ -94,7 +95,7 @@ $("#style_name").focusin(function() {
 		      		$('#icon3').html('<i class="icon-remove"></i>');
 		      		}
 		      		else {
-		          $('#icon3').html('<i class="icon-ok"></i> ' + submodel + ' initialized');
+		          $('#icon3').html('<i class="icon-pencil"></i> ' + submodel);
 		          }
 		      }
 		      else {
@@ -103,7 +104,7 @@ $("#style_name").focusin(function() {
 		              source.push(data[i]['name']);
 		          }
 		          $('#style_submodel_name').autocomplete({ source: source });
-		          $('#icon3').html('<i class="icon-ok"></i> ' + submodel + ' found');
+		          $('#icon3').html('<i class="icon-ok"></i> ' + submodel);
 		      }
 		  }
 	});

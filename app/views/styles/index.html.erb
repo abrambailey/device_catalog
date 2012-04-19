@@ -21,7 +21,8 @@
         <td><%= style.submodel.model.name %></td>
 				<td><%= style.submodel.name %></td>
         <td><%= style.generic %></td>
-        <td><%= style.name %></td>
+        <td id = "style<%= style.id %>"><a><%= style.name %></a></td>
+        <script> $("#style<%= style.id %> > a").popover({title: 'Features', content: "<%= optcutter(style.options) %>", placement: "bottom"}); </script>
         <td>
           <%= link_to 'Edit', edit_style_path(style), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', style_path(style), :remote => true, :method => :delete, :class => 'btn btn-mini btn-danger' %>
@@ -32,4 +33,8 @@
 </table>
 
 <br />
+<a href="#" id="hello">hover over me</a>
 </div>
+
+
+

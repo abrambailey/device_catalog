@@ -33,7 +33,7 @@ class Style < ActiveRecord::Base
   def brand_name=(name)
     self.brand = Brand.find_or_initialize_by_name(name) if name.present?
   end
-  
+
   before_save :format_string
   
   private

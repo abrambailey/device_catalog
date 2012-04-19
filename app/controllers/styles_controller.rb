@@ -107,4 +107,5 @@ class StylesController < ApplicationController
       format.js
     end
   end
+  
 end
