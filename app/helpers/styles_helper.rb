@@ -4,7 +4,7 @@ module StylesHelper
   	cutopts = options.scan(/\w+/)
  		@opts = ""
  		cutopts.each do |x|
- 			@opts = @opts+"#{x} "
+ 			@opts = @opts+"<b>#{x}</b> <br />"
 		end
   return @opts
   end
