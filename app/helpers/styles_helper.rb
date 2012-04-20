@@ -1,11 +1,12 @@
 module StylesHelper
 
   def optcutter(options)
-  	cutopts = options.scan(/\w+/)
- 		@opts = ""
+		cutopts = YAML.load(options).reject(&:empty?)
+		@opts = ['<ul>']
  		cutopts.each do |x|
- 			@opts = @opts+"<b>#{x}</b> <br />"
+ 			@opts.push("<li type=square>#{x}</li>")
 		end
-  return @opts
+		@opts.push('</ul>')
+		return @opts
   end
 end
