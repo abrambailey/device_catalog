@@ -2,7 +2,6 @@ class StylesController < ApplicationController
   # GET /styles
   # GET /styles.json
   def index
-    @styles = Style.all.reverse
     @style = Style.new
 
     respond_to do |format|
@@ -79,6 +78,18 @@ class StylesController < ApplicationController
 	  end
 	end
 
+	def styletest
+	  @model = Model.find_or_initialize_by_name(params[:model_name])
+  	@brand = Brand.find_or_initialize_by_name(params[:brand_name])
+  	@submodel = Submodel.find_or_initialize_by_name(params[:submodel_name])
+  	@style = Style.where(:name => params[:style_name], :model_id => @model.id, :brand_id => @brand.id, :submodel_id => @submodel.id)
+  	if @style.empty?
+  		render json: []
+		else
+			render json: @style
+  	end
+	end
+	
   # PUT /styles/1
   # PUT /styles/1.json
   def update

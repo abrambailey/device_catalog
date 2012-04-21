@@ -11,6 +11,7 @@ Goodstyles::Application.routes.draw do
 	match 'selectsubmodels', to: 'submodels#selectsubmodels'
 	match 'savesubmodel', to: 'submodels#savesubmodel'
 	match 'submodeltest', to: 'submodels#submodeltest'
+	match 'styletest', to: 'styles#styletest'
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.

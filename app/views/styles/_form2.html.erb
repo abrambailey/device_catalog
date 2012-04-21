@@ -110,6 +110,29 @@ $("#style_name").focusin(function() {
 	});
 });
 
-
+$("#style_name").focusout(function() {
+	var style = $("#style_name").val();
+	var brand = $("#style_brand_name").val();
+	var model = $("#style_model_name").val();
+	var submodel = $("#style_submodel_name").val();
+	$.ajax({
+		  url: '/styletest?submodel_name=' + submodel + '&model_name=' + model + '&brand_name=' + brand + '&style_name=' + style, type: 'get', 
+		  dataType: 'json',
+		  processData: false,
+		  success: function(data) {
+		  	if (data == "") {
+					if (style == "") {
+						$('#icon4').html('<i class="icon-remove"></i>');
+					}
+					else {
+						$('#icon4').html('<i class="icon-pencil"></i> ' + style);
+					}
+				}
+				else {
+					$('#icon4').html('<i class="icon-remove"></i> ' + style + ' exists');
+				}
+			}
+  });
+});
 
 </script>

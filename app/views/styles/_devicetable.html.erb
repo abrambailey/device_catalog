@@ -1,0 +1,35 @@
+<% @styles = Style.all.reverse %>
+
+<table class="table table-condensed" id="devices">
+  <thead>
+    <tr>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Submodel</th>
+      <th>Style</th>
+      <th>Market Style</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @styles.each do |style| %>
+      <tr id = "<%= style.id %>" >
+        <td><%= style.submodel.model.brand.name %></td>
+        <td><%= style.submodel.model.name %></td>
+				<td><%= style.submodel.name %></td>
+        <td><%= style.generic %></td>
+        <td id = "style<%= style.id %>"><%= link_to(style.name, '#', :class => "pop_html", :title => "Features", "data-content" => optcutter(style)) %></td>
+        <td>
+          <%= link_to 'Edit', edit_style_path(style), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', style_path(style), :remote => true, :method => :delete, :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<script>
+$('.pop_html').popover({ html: true, placement: "bottom" });
+</script>
+
