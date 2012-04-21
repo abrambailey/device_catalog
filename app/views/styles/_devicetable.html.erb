@@ -28,8 +28,11 @@
   </tbody>
 </table>
 
-
 <script>
-$('.pop_html').popover({ html: true, placement: "bottom" });
+$('.pop_html').popover({ html: true, placement: "bottom" });    
+$('#devices').dataTable({
+  "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+  "sPaginationType": "bootstrap"
+});
 </script>
 

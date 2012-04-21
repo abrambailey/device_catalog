@@ -4,6 +4,7 @@ gem 'rails', '3.2.3.rc2'
 gem 'execjs' 
 gem 'simple_form'
 gem 'chosen-rails'
+gem 'jquery-datatables-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

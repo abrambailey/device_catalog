@@ -16,5 +16,7 @@
 //= require twitter/bootstrap
 //= require bootstrap-tooltip
 //= require bootstrap-popover
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require chosen-jquery
 //= require_tree .
