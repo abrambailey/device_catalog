@@ -1,2 +1,2 @@
 $("#devicetable").html("<%= escape_javascript(render(:partial => 'devicetable' )) %>")
-$('#<%= j("#{@styles.first.id}") %> > td').effect('highlight', {}, 1000);
+$('#<%= j("#{@styles.last.id}") %> > td').effect('highlight', {}, 1000);
