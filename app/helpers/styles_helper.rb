@@ -12,4 +12,9 @@ module StylesHelper
 		@opts.push('</ul>')
 		return @opts
   end
+  
+  def imagefeed(style)
+		return image_tag style.dimage.url(:medium)
+  end
+  
 end

@@ -1,10 +1,12 @@
 class Style < ActiveRecord::Base
-  attr_accessible :name, :submodel_id, :model_id, :brand_id, :submodel_name, :model_name, :brand_name, :generic, :battery, :programs, :channels, :options
+ attr_accessible :dimage, :name, :submodel_id, :model_id, :brand_id, :submodel_name, :model_name, :brand_name, :generic, :battery, :programs, :channels, :options
   belongs_to :submodel
   belongs_to :model
   belongs_to :style
   belongs_to :brand
-  
+
+	has_attached_file :dimage, :styles => { :medium => "270x270>", :thumb => "100x100>" }
+	
   validates_presence_of :name
   validates_presence_of :brand_name
   validates_presence_of :model_name

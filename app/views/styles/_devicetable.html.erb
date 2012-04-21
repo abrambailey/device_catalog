@@ -14,8 +14,9 @@
   </thead>
   <tbody>
     <% @styles.each do |style| %>
-      <tr id = "<%= style.id %>" >
-      	<td><%= style.id %></td>
+    	<% @image = image_tag style.dimage.url(:medium) %>
+      <tr id = "<%= style.id %>">
+      	<td><%= link_to(style.id, '#', :class => "pop_image", :title => "Product Image", "data-content" => "#{@image}") %></td>
         <td><%= style.submodel.model.brand.name %></td>
         <td><%= style.submodel.model.name %></td>
 				<td><%= style.submodel.name %></td>
@@ -32,6 +33,7 @@
 
 <script>
 $('.pop_html').popover({ html: true, placement: "bottom" });    
+$('.pop_image').popover({ html: true, placement: "bottom" });
 $('#devices').dataTable({
   "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
   "sPaginationType": "bootstrap",

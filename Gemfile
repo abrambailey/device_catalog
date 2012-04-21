@@ -5,6 +5,7 @@ gem 'execjs'
 gem 'simple_form'
 gem 'chosen-rails'
 gem 'jquery-datatables-rails'
+gem 'paperclip'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

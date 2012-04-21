@@ -9,7 +9,7 @@
 		<%= m.input :programs, :placeholder => "# of Programs" %>
 		<%= m.input :channels, :placeholder => "# of Channels" %>
 		<%= m.input :options, :collection => [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ], :input_html => { :multiple => true } %>
-
+		<%= m.input :dimage, :label => "Image" %>
     <div class="form-actions" style = "background:none">
       <%= m.submit nil, :class => 'btn btn-primary' %>
       <%= link_to 'Cancel', brands_path, :class => 'btn' %>
