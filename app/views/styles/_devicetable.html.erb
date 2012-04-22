@@ -16,7 +16,12 @@
     <% @styles.each do |style| %>
     	<% @image = image_tag style.dimage.url(:medium) %>
       <tr id = "<%= style.id %>">
-      	<td><%= link_to(style.id, '#', :class => "pop_image", :title => "Product Image", "data-content" => "#{@image}") %></td>
+      <% if style.id.to_s.length == 1 %>
+      	<% @id = "0#{style.id}" %>
+    	<% else %>
+    		<% @id = style.id %>
+    	<% end %>
+      	<td><%= link_to(@id, '#', :class => "pop_image", :title => "Product Image", "data-content" => "#{@image}") %></td>
         <td><%= style.submodel.model.brand.name %></td>
         <td><%= style.submodel.model.name %></td>
 				<td><%= style.submodel.name %></td>

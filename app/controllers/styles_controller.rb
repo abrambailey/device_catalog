@@ -10,6 +10,15 @@ class StylesController < ApplicationController
     end
   end
 
+  def create_dashboard
+    @style = Style.new
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @styles }
+    end
+  end
+  
   # GET /styles/1
   # GET /styles/1.json
   def show
@@ -40,6 +49,7 @@ class StylesController < ApplicationController
   # GET /styles/1/edit
   def edit
     @style = Style.find(params[:id])
+    @style.options = YAML.load(@style.options)
   end
 
   # POST /styles
@@ -64,12 +74,19 @@ class StylesController < ApplicationController
     @style.brand_id = @brand.id
 		@stylecheck = Style.where(:name => @style.name, :brand_id => @brand.id, :model_id => @model.id, :submodel_id => @submodel.id)
 		if @stylecheck.empty?
-			@style.save
-		  respond_to do |format|
-		      #format.html { redirect_to @style, notice: 'Style was successfully created.' }
-		      format.json { render json: @style, status: :created, location: @style }
-		      format.js
-      end
+			if @style.save
+			redirect_to root_path
+		  #respond_to do |format|
+		  		#format.html redirect_to root_path
+		      #format.json { render json: @style, status: :created, location: @style }
+		      #format.js
+      #end
+      else
+      	respond_to do |format|
+      		format.json { render json: @style.errors, status: :unprocessable_entity }
+      		format.js { render 'reload' }
+    		end
+  		end
     else
     	@style = @stylecheck.first
     	respond_to do |format|

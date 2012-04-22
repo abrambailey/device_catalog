@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/brynary/rack-bug.git
+  revision: 1e6d33664fb21a5f08836e5d8a9d7bfcc47c8d81
+  branch: rails3
+  specs:
+    rack-bug (0.3.0)
+      rack (>= 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -139,6 +147,7 @@ DEPENDENCIES
   jquery-rails
   paperclip
   pg
+  rack-bug!
   rails (= 3.2.3.rc2)
   sass-rails (~> 3.2.3)
   simple_form

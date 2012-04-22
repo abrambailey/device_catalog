@@ -1,0 +1,50 @@
+<% @styles = Style.all %>
+<table class="table table-striped" id="devices">
+  <thead>
+    <tr>
+    	<th>Image</th>
+    	<th>ID</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Submodel</th>
+      <th>Style</th>
+      <th>Market Style</th>
+      <th>Features</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @styles.each do |style| %>
+      <tr style = "font-size:20px;" id = "<%= style.id %>">
+      <% if style.id.to_s.length == 1 %>
+      	<% @id = "0#{style.id}" %>
+    	<% else %>
+    		<% @id = style.id %>
+    	<% end %>
+    		<td style = "vertical-align: middle;"><%= image_tag(style.dimage.url(:thumb), :class => "thumbnail", :style => "vertical-align: middle;") %></td>
+      	<td style = "vertical-align: middle;"><%= @id %></td>
+        <td style = "vertical-align: middle;"><%= style.submodel.model.brand.name %></td>
+        <td style = "vertical-align: middle;"><%= style.submodel.model.name %></td>
+				<td style = "vertical-align: middle;"><%= style.submodel.name %></td>
+        <td style = "vertical-align: middle;"><%= style.generic %></td>
+        <td style = "vertical-align: middle;" id = "style<%= style.id %>"><%= link_to(style.name, '#', :class => "pop_html", :title => "Features", "data-content" => optcutter(style)) %></td>
+        <td style = "vertical-align: middle; line-height:30px;"><%= featurelist(style).html_safe %></td>
+        <td style = "vertical-align: middle;">
+          <%= link_to 'Edit', edit_style_path(style), :class => 'btn' %>
+          <%= link_to 'Destroy', style_path(style), :remote => true, :method => :delete, :class => 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+$('.pop_html').popover({ html: true, placement: "bottom" });    
+$('.pop_image').popover({ html: true, placement: "bottom" });
+$('#devices').dataTable({
+  "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+  "sPaginationType": "bootstrap",
+  "aaSorting": [[ 0, "desc" ]]
+});
+</script>
+

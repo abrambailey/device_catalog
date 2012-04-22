@@ -12,6 +12,7 @@ Goodstyles::Application.routes.draw do
 	match 'savesubmodel', to: 'submodels#savesubmodel'
 	match 'submodeltest', to: 'submodels#submodeltest'
 	match 'styletest', to: 'styles#styletest'
+	match '/', to: 'styles#create_dashboard'
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -62,7 +63,7 @@ Goodstyles::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'styles#index'
+  root :to => 'styles#create_dashboard'
 
   # See how all your routes lay out with "rake routes"
 

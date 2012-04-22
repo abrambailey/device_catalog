@@ -13,6 +13,15 @@ module StylesHelper
 		return @opts
   end
   
+  def featurelist(style)
+  features = YAML.load(style.options).reject(&:empty?)
+  @opts = ""
+  features.each do |x|
+ 			@opts = @opts + "<span class = btn btn-info>#{x}</span><br />"
+		end
+		return @opts 
+  end
+  
   def imagefeed(style)
 		return image_tag style.dimage.url(:medium)
   end

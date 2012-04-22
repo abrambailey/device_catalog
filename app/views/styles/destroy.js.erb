@@ -1,1 +1,1 @@
-$('#<%= @style.id %>').remove();
+$("#devicetable").html("<%= escape_javascript(render(:partial => 'devicetable' )) %>")

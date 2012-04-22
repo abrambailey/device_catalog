@@ -5,12 +5,18 @@ class Style < ActiveRecord::Base
   belongs_to :style
   belongs_to :brand
 
-	has_attached_file :dimage, :styles => { :medium => "270x270>", :thumb => "100x100>" }
+	has_attached_file :dimage, :styles => { :medium => "260x260>", :thumb => "100x100>" }
 	
   validates_presence_of :name
   validates_presence_of :brand_name
   validates_presence_of :model_name
   validates_presence_of :submodel_name
+  validates_presence_of :generic, :message => ""
+  validates_presence_of :battery, :message => ""
+  validates_presence_of :programs
+  validates_presence_of :channels
+  validates :dimage, :attachment_presence => true
+  validates_attachment_content_type :dimage, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   
   def submodel_name
   	submodel.try(:name)

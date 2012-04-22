@@ -6,6 +6,7 @@ gem 'simple_form'
 gem 'chosen-rails'
 gem 'jquery-datatables-rails'
 gem 'paperclip'
+gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

@@ -36,4 +36,9 @@ Goodstyles::Application.configure do
   config.assets.debug = true
   
   Paperclip.options[:command_path] = "/usr/bin/"
+  
+  config.middleware.use "Rack::Bug",
+  :secret_key => "12345"
+  
+  config.gem 'rack-bug', :lib => 'rack/bug'
 end
