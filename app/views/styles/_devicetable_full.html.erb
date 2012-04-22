@@ -3,14 +3,14 @@
   <thead>
     <tr>
     	<th>Image</th>
-    	<th>ID</th>
-      <th>Brand</th>
-      <th>Model</th>
-      <th>Submodel</th>
-      <th>Style</th>
-      <th>Market Style</th>
-      <th>Features</th>
+    	
+      <th>Device</th>
+      <th>Generic Style</th>
+      <% [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ].each do |x| %>
+    	<%= "<th>#{x}</th>".html_safe %>
+  		<% end %>
       <th>Actions</th>
+      <th>ID</th>
     </tr>
   </thead>
   <tbody>
@@ -22,17 +22,15 @@
     		<% @id = style.id %>
     	<% end %>
     		<td style = "vertical-align: middle;"><%= image_tag(style.dimage.url(:thumb), :class => "thumbnail", :style => "vertical-align: middle;") %></td>
-      	<td style = "vertical-align: middle;"><%= @id %></td>
-        <td style = "vertical-align: middle;"><%= style.submodel.model.brand.name %></td>
-        <td style = "vertical-align: middle;"><%= style.submodel.model.name %></td>
-				<td style = "vertical-align: middle;"><%= style.submodel.name %></td>
+      	
+        <td style = "vertical-align: middle;"><%= style.submodel.model.brand.name %> <%= style.submodel.model.name %> <%= style.submodel.name %> <%= style.name %></td>
         <td style = "vertical-align: middle;"><%= style.generic %></td>
-        <td style = "vertical-align: middle;" id = "style<%= style.id %>"><%= link_to(style.name, '#', :class => "pop_html", :title => "Features", "data-content" => optcutter(style)) %></td>
-        <td style = "vertical-align: middle; line-height:30px;"><%= featurelist(style).html_safe %></td>
+        <% [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ].each do |x| %>
+    		<%= style.options.include?(x) ? "<td style = \"vertical-align: middle;\">Yes <i class=\"icon-ok\"></i></td>".html_safe : "<td></td>".html_safe %>
+				<% end %>
         <td style = "vertical-align: middle;">
-          <%= link_to 'Edit', edit_style_path(style), :class => 'btn' %>
-          <%= link_to 'Destroy', style_path(style), :remote => true, :method => :delete, :class => 'btn btn-danger' %>
-        </td>
+          <%= link_to 'Review this Product', "#", :class => 'btn btn-danger' %>
+        </td><td style = "vertical-align: middle;"><%= @id %></td>
       </tr>
     <% end %>
   </tbody>
@@ -44,7 +42,7 @@ $('.pop_image').popover({ html: true, placement: "bottom" });
 $('#devices').dataTable({
   "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
   "sPaginationType": "bootstrap",
-  "aaSorting": [[ 0, "desc" ]]
+  "aaSorting": [[ 11, "desc" ]]
 });
 </script>
 
