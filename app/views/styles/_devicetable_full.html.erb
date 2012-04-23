@@ -1,13 +1,13 @@
 <% @styles = Style.all %>
 <table class="table table-striped" id="devices">
   <thead>
-    <tr>
+    <tr class= "table-bordered">
     	<th>Image</th>
     	
       <th>Device</th>
       <th>Generic Style</th>
       <% [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ].each do |x| %>
-    	<%= "<th>#{x}</th>".html_safe %>
+    	<%= "<th style = \"min-width:50px; \">#{x}</th>".html_safe %>
   		<% end %>
       <th>Actions</th>
       <th>ID</th>
@@ -21,12 +21,12 @@
     	<% else %>
     		<% @id = style.id %>
     	<% end %>
-    		<td style = "vertical-align: middle;"><%= image_tag(style.dimage.url(:thumb), :class => "thumbnail", :style => "vertical-align: middle;") %></td>
+    		<td style = "vertical-align: middle;"><%= link_to image_tag(style.dimage.url(:thumb), :class => "thumbnail", :style => "vertical-align: middle;"), style_path(style) %></td>
       	
-        <td style = "vertical-align: middle;"><%= style.submodel.model.brand.name %> <%= style.submodel.model.name %> <%= style.submodel.name %> <%= style.name %></td>
-        <td style = "vertical-align: middle;"><%= style.generic %></td>
+        <td style = "vertical-align: middle;"><span class ="btn"><%= link_to "#{style.submodel.model.brand.name} #{style.submodel.model.name} #{style.submodel.name} #{style.name}", style_path(style), :style => "text-decoration:none; color:black;" %></span></td>
+        <td style = "vertical-align: middle; text-align:center;\"><span class ="btn"><%= style.generic %><span></td>
         <% [ "VC", "Push Button", "Power", "FM", "Bluetooth", "Music Program", "Directional Mics" ].each do |x| %>
-    		<%= style.options.include?(x) ? "<td style = \"vertical-align: middle;\">Yes <i class=\"icon-ok\"></i></td>".html_safe : "<td></td>".html_safe %>
+    		<%= style.options.include?(x) ? "<td style = \"text-align:center; vertical-align: middle;\"><span class =\"btn btn-info\"><i class = \"icon-ok icon-white\"> </i></span></td>".html_safe : "<td></td>".html_safe %>
 				<% end %>
         <td style = "vertical-align: middle;">
           <%= link_to 'Review this Product', "#", :class => 'btn btn-danger' %>
@@ -39,10 +39,12 @@
 <script>
 $('.pop_html').popover({ html: true, placement: "bottom" });    
 $('.pop_image').popover({ html: true, placement: "bottom" });
-$('#devices').dataTable({
-  "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-  "sPaginationType": "bootstrap",
-  "aaSorting": [[ 11, "desc" ]]
+$(document).ready( function () {
+	var oTable = $('#devices').dataTable({
+		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+		"sPaginationType": "bootstrap",
+		"aaSorting": [[ 11, "desc" ]],
+		});
 });
 </script>
 
